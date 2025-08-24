@@ -1,7 +1,6 @@
-name: "Deploy to aws"
+name: "Deploy to AWS"
 
-# Trigger the workflow from the GitHub UI
-on: 
+on:
   workflow_dispatch:
 
 jobs:
@@ -9,7 +8,7 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: "Setup node.js"
+      - name: "Setup Node.js"
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -18,12 +17,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: "Install dependencies"
-        run: npm install 
+        run: npm install
 
       - name: "Install pm2 globally"
         run: npm install -g pm2
 
-      # Removed test step (since no test script in package.json)
-
-      - name: "Deploy to aws with pm2"
-        run: pm2 start npm -- start
+      - name: "Deploy with pm2"
+        run: pm2 start server.js --name ecomwebsite --watch
