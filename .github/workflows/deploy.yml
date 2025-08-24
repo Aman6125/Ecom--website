@@ -15,16 +15,15 @@ jobs:
           node-version: "22"
 
       - name: "Checkout code"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: "Install dependencies"
         run: npm install 
 
-      - name: "Intall pm2 globally"
-        run: npm instal pm2 -g
+      - name: "Install pm2 globally"
+        run: npm install -g pm2
 
-      - name: "Run the tests"
-        run: npm test
+      # Removed test step (since no test script in package.json)
 
-      - name: "Deploye to aws"
-        run : pm2 start/nodemon server.js
+      - name: "Deploy to aws with pm2"
+        run: pm2 start npm -- start
